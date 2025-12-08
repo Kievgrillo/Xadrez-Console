@@ -8,6 +8,8 @@ namespace xadrez
         public int Turno { get; private set; }
         public Cor JogadorAtual { get; private set; }
         public bool Terminada { get; private set; }
+        private HashSet<Peca> Pecas;
+        private HashSet<Peca> Capturadas;
 
         public PartidaDeXadrez()
         {
@@ -15,6 +17,8 @@ namespace xadrez
             Turno = 1;
             JogadorAtual = Cor.branca;
             Terminada = false;
+            Pecas = new HashSet<Peca>();
+            Capturadas = new HashSet<Peca>();
             ColocarPecas();
         }
 
@@ -24,6 +28,10 @@ namespace xadrez
             p.IncrementarQteMovimentos();
             Peca pecaCapturada = Tab.RetirarPeca(destino);
             Tab.ColocarPeca(p, destino);
+            if (pecaCapturada != null)
+            {
+                Capturadas.Add(pecaCapturada);
+            }
         }
 
         public void RealizaJogada(Posicao origem, Posicao destino)
@@ -49,6 +57,47 @@ namespace xadrez
             }
         }
 
+        public void ValidarPosicaoDeDestino(Posicao origem, Posicao destino)
+        {
+            if (!Tab.peca(origem).PodeMover(destino))
+            {
+                throw new TabuleiroException("Posição de destino inválida!");
+            }
+        }
+
+        public void colocarNovaPeca(char coluna, int linha, Peca peca)
+        {
+            Tab.ColocarPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
+            Pecas.Add(peca);
+        }
+
+        public HashSet<Peca> PecasCapturadas(Cor cor)
+        {
+            HashSet<Peca> aux = new HashSet<Peca>();
+            foreach (Peca x in Capturadas)
+            {
+                if (x.Cor == cor)
+                {
+                    aux.Add(x);
+                }
+            }
+            return aux;
+        }
+
+        public HashSet<Peca> PecasEmJogo(Cor cor)
+        {
+            HashSet<Peca> aux = new HashSet<Peca>();
+            foreach (Peca x in Pecas)
+            {
+                if (x.Cor == cor)
+                {
+                    aux.Add(x);
+                }
+            }
+            aux.ExceptWith(PecasCapturadas(cor));
+            return aux;
+        }
+
         #region Metodos Privados
         private void MudaJogador()
         {
@@ -57,13 +106,12 @@ namespace xadrez
 
         private void ColocarPecas()
         {
-            Tab.ColocarPeca(new Torre(Tab, Cor.branca), new PosicaoXadrez('c', 1).toPosicao());
-            Tab.ColocarPeca(new Torre(Tab, Cor.branca), new PosicaoXadrez('c', 2).toPosicao());
-            Tab.ColocarPeca(new Rei(Tab, Cor.branca), new PosicaoXadrez('b', 3).toPosicao());
-
-            Tab.ColocarPeca(new Torre(Tab, Cor.preto), new PosicaoXadrez('c', 3).toPosicao());
-            Tab.ColocarPeca(new Torre(Tab, Cor.preto), new PosicaoXadrez('c', 7).toPosicao());
-            Tab.ColocarPeca(new Rei(Tab, Cor.preto), new PosicaoXadrez('b', 6).toPosicao());
+            colocarNovaPeca('c', 1, new Torre(Tab, Cor.branca));
+            colocarNovaPeca('c', 2, new Torre(Tab, Cor.branca));
+            colocarNovaPeca('b', 3, new Rei(Tab, Cor.branca));
+            colocarNovaPeca('c', 3, new Torre(Tab, Cor.preto));
+            colocarNovaPeca('c', 7, new Torre(Tab, Cor.preto));
+            colocarNovaPeca('b', 6, new Rei(Tab, Cor.preto));
         }
         #endregion
     }
