@@ -1,4 +1,55 @@
-♟️ Chess Console Game
+EN - ♟️ Chess Console Game
+
+A complete chess game developed in C# using .NET 9.0 in a Console Application architecture.
+This project was created to practice programming logic, OOP, board manipulation, and official chess rules. I plan to improve and expand the project with new features in the future.
+
+🚀 Technologies Used
+
+C# 13
+
+.NET 9.0
+
+Console Application
+
+Object-Oriented Programming (OOP)
+
+🎮 About the Project
+
+The game implements the basic rules of chess and runs directly in the terminal. Key features include:
+
+✔️ 8x8 board representation
+✔️ Movement of all chess pieces
+✔️ Handling of invalid moves
+✔️ Turn switching between white and black
+✔️ Check verification
+✔️ Modular structure for future expansions
+✔️ Clean and maintainable code
+
+🧠 Technical Concepts Used
+
+Object-oriented modeling
+
+Polymorphism for piece movements
+
+Chess rule validation
+
+Clean and reusable design
+
+Exception handling
+
+Clear separation of responsibilities
+
+🛠️ Future Improvements
+
+🔧 Implement full checkmate detection
+🔧 Add castling, en passant, and pawn promotion
+🔧 Create player vs. computer mode
+🔧 Create a graphical interface (WPF or MAUI)
+🔧 Add unit tests
+🔧 Export matches in PGN format
+🔧 Highlight possible moves on the board
+
+PT-BR - ♟️ Chess Console Game
 
 Um jogo de xadrez completo, desenvolvido em C# utilizando .NET 9.0 na arquitetura Console Application.
 O projeto foi criado para treinar lógica de programação, POO, manipulação de tabuleiro e regras oficiais do xadrez.
