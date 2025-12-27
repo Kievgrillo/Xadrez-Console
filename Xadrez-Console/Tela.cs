@@ -62,7 +62,7 @@ namespace Xadrez_Console
             }
             else
             {
-                if (peca.Cor == Cor.branca)
+                if (peca.Cor == Cor.Branca)
                 {
                     Console.Write(peca);
                 }
@@ -103,12 +103,12 @@ namespace Xadrez_Console
         {
             Console.WriteLine("Peças Capturadas:");
             Console.Write("Brancas: ");
-            ImprimirConjunto(partida.PecasCapturadas(Cor.branca));
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
             Console.WriteLine();
             Console.Write("Pretas: ");
             ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            ImprimirConjunto(partida.PecasCapturadas(Cor.preto));
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Preto));
             Console.ForegroundColor = aux;
             Console.WriteLine();
         }
